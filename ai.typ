@@ -16,12 +16,9 @@
 
 Для настройки предложена два приложения:
 
-- #link("https://github.com/QwenLM/qwen-code")[opencode]#footnote[
-    Не доступен из РФ, но включаем бесплатный доступ к перечню моделей.
-  ],
-- #link("https://github.com/anomalyco/opencode")[qwen-code]#footnote[
-    Доступен из РФ, но доступна одна модель.
-  ].
+- #link("https://github.com/QwenLM/qwen-code")[opencode],
+- #link("https://github.com/anomalyco/opencode")[qwen-code],
+- #link("https://kodacode.ru/")[kodacode]#footnote[ Доступен из РФ, может работать из вашей IDE. ].
 
 Для работы на встрече выбор не принципиален, потому что мы не будем использовать _продвинутые_ возможности.
 

@@ -4,10 +4,13 @@
   show "opencode": [*opencode*]
   show "qwen": [*qwen*]
   show "qwen-code": [*qwen-code*]
+  show "kodacode": [*kodacode*]
   show "Tab": [*Tab*]
   show "AI": [*AI*]
 
   show "TDD": [*TDD*]
+  show "ATDD": [*ATDD*]
+  show "Acceptance Testing": [*Acceptance Testing*]
   show "Pair-Programming": [*Pair-Programming*]
 
   show "Java": [*Java*]
@@ -29,11 +32,12 @@
   [
     У агентов есть несколько режимов работы. Они управляют тем, что доступно для выполнения агенту:
 
-    - *opencode* переключается между режимами _plan_, _edit_ по Tab.
-    - *qwen-code* переключается по команде `/approval-mode`
+    - opencode переключается между режимами _plan_, _edit_ по Tab.
+    - qwen-code переключается по команде `/approval-mode`
+    - kodacode работает только в одном режиме, поэтому там надо аккуратнее
+      формулировать задачу.
 
     Это важно для работы, чтобы не бросаться к разработке сразу, а сначала составить план.
-
   ]
 }
 
@@ -42,7 +46,8 @@
     В порядке важности:
 
     1. Весело провести время!
-    2. Научиться писать классный код используя TDD, совместную разработку и другие техники разработки ПО.
+    2. Научиться писать классный код используя TDD, приемочные тесты,
+      совместную разработку и другие техники разработки ПО.
     2. Взять на себя риск и поэкспериментировать.
     3. Поработать с AI.
     4. Делиться опытом!
@@ -51,74 +56,142 @@
 
 #let plan() = {
   [
-    - *11:00*: Мы тут.
-    - *11:30*: Первая сессия в группах.
+    - *11:00*: Начало.
+    - *11:30*: Первая сессия.
     - *12:30*: Демонстрация и обсуждение.
     - *12:45*: Перерыв.
-    - *13:00*: Вторая сессия в новых группах с ограничениями .
-    - *14:00*: Демонстрация и обсуждение.
-    - *14:15*: Перерыв.
-    - *14:30*: Работа с AI.
-    - *15:00*: Третья сессия в новых группах с AI.
-    - *16:00*: Демонстрация и обсуждение.
-    - *16:15*: Закрытие. #footnote[
-        Желающие смогут продолжить на фудкорте
-        #link("https://dreamisland.ru/objects/park/restaurants")[Острова мечты].
-      ]
+    - *13:00*: Работа с AI.
+    - *13:30*: Вторая сессия.
+    - *14:30*: Демонстрация и обсуждение.
+    - *14:45*: Перерыв.
+    - *15:15*: Приемочное тестирование с AI.
+    - *15:45*: Третья сессия.
+    - *16:45*: Демонстрация и обсуждение.
+    - *17:00*: Закрытие. #footnote[ В конце можно организоваться и продолжить вечер в парке. ]
   ]
 }
 
 
 #let task() = {
   [
+    #link("https://github.com/brighthr/checkout-kata")[Checkout Kata]
 
-    #link("https://matejker.github.io/game-of-life/#orthogonal---the-original-live-demo")[Игра жизни:]
+    В магазине есть: *товар*, *цена на товар*, *специальная цена на товар*.
 
-    - *Живая клетка*:
-      - с _одним_ или _без_ соседей *умирает* от одиночества.
-      - с _четырьмя_ или _более_ соседями *умирает* от перенаселения.
-      - с _двумя_ или _тремя_ соседями *выживает*.
-    - *Мертвая клетка*:
-      - с _тремя_ соседями *оживает*.
+    *Товар*: Единица продукта, определяемая по идентификатору *SKU* (_Stock Keeping Unit_). В нашем случае *SKU* может быть произвольной строкой.
+    *Цена на товар*: Стоимость *одного товара*. В нашем случае это просто число.
+    *Специальная цена на товар*: Стоимость *нескольких единиц товара*.
+
+    _Пример специальной цены_: Товар "A" стоит 50, но если покупать сразу 3, то они обойдутся в 130.
   ]
-}
-
-#let task-hex(enable-footnote: true) = {
-  [
-    #link("https://matejker.github.io/game-of-life/#hexagonal-live-demo")[
-      Гексагональная игра жизни:
-    ]#if enable-footnote {
-      footnote[
-        Есть другая ссылка, может
-        #link("https://arunarjunakani.github.io/HexagonalGameOfLife/")[она]
-        вам будет удобнее.
-      ]
-    }
-
-    - *Живая клетка*:
-      - с _одним_ или _без_ соседей *умирает* от одиночества.
-      - с _тремя_ или _более_ соседями *умирает* от перенаселения.
-      - с _двумя_ соседями *выживает*.
-    - *Мертвая клетка*:
-      - с _двумя_ соседями *оживает*.
-  ]
-}
-
-#let task-hex-qr(size: 3cm) = {
-  import "@preview/cades:0.3.1": qr-code
-
-  qr-code("https://matejker.github.io/game-of-life/#hexagonal-live-demo", width: size)
 }
 
 #let task-qr(size: 3cm) = {
   import "@preview/cades:0.3.1": qr-code
 
-  qr-code("https://matejker.github.io/game-of-life/#orthogonal---the-original-live-demo", width: size)
+  qr-code("https://github.com/brighthr/checkout-kata", width: size)
+}
+
+#let checkout-example-diagram() = {
+  let border = rgb("#B0BEC5")
+  let muted = rgb("#455A64")
+  let price-fill = rgb("#E3F2FD")
+  let special-fill = rgb("#FFFDE7")
+  let basket-fill = rgb("#F3E5F5")
+  let receipt-fill = rgb("#E8F5E9")
+
+  let panel(title, body, fill: luma(250)) = {
+    rect(
+      width: 100%,
+      fill: fill,
+      stroke: 0.6pt + border,
+      radius: 4pt,
+      inset: 8pt,
+    )[
+      #set text(size: 9pt)
+      #text(weight: "bold", title)
+      #v(4pt)
+      #body
+    ]
+  }
+
+  let sku(id) = box(
+    fill: luma(255),
+    stroke: 0.5pt + border,
+    radius: 3pt,
+    inset: (x: 5pt, y: 2pt),
+    text(weight: "bold", id),
+  )
+
+  let price-rules = table(
+    columns: (auto, auto, auto),
+    column-gutter: 7pt,
+    align: (left, right, left),
+    stroke: none,
+    inset: (x: 3pt, y: 1.5pt),
+    table.header([*SKU*], [*Цена*], [*Спеццена*]),
+    [A], [50], [3 за 130],
+    [B], [30], [2 за 45],
+    [C], [20], [-],
+  )
+
+  let basket = grid(
+    columns: (auto,) * 6,
+    gutter: 3pt,
+    sku([A]),
+    sku([A]),
+    sku([A]),
+    sku([B]),
+    sku([B]),
+    sku([C]),
+  )
+
+  let receipt = [
+    #table(
+      columns: (auto, auto),
+      column-gutter: 9pt,
+      align: (left, right),
+      stroke: none,
+      inset: (x: 4pt, y: 1.5pt),
+      [A x3], [130],
+      [B x2], [45],
+      [C x1], [20],
+    )
+    #v(2pt)
+    #box(
+      width: 100%,
+      fill: luma(255),
+      stroke: 0.5pt + border,
+      radius: 3pt,
+      inset: (x: 5pt, y: 3pt),
+      align(center)[*Итого: 195*],
+    )
+  ]
+
+  figure(
+    grid(
+      columns: (1fr, auto, 1fr),
+      column-gutter: 10pt,
+      align: horizon,
+      grid(
+        columns: 1,
+        row-gutter: 6pt,
+        panel([Прайс-лист], price-rules, fill: price-fill),
+        panel([Корзина], basket, fill: basket-fill),
+        panel([Специальные цены], [3 x A и 2 x B считаются группами], fill: special-fill),
+      ),
+      align(center)[#text(size: 24pt, fill: muted)[#sym.arrow]],
+      panel([Чек], receipt, fill: receipt-fill),
+    ),
+    caption: [Пример применения специальных цен],
+    numbering: none,
+  )
 }
 
 #let feedback-qr(size: 3cm) = {
   import "@preview/cades:0.3.1": qr-code
 
+  // TODO: Создать новую форму.
   qr-code("https://forms.gle/7ifnuU9rVhfxxQk4A", width: size)
 }
 

@@ -11,7 +11,7 @@
 *Telegram*:
 
 - _\@technicalexcellenceru_,
-- _\@mtsfintechjobs_.
+- _\@ozon_tech_.
 
 == Расписание
 
@@ -20,15 +20,6 @@
 == Цели
 
 #goals()
-
-#place(
-  bottom + right,
-  figure(
-    image("img/meetup-logo.png", width: 50%),
-    numbering: none,
-  ),
-)
-
 
 #colbreak()
 
@@ -65,7 +56,6 @@
 = Задача
 
 #task()
-#task-hex(enable-footnote: false)
 
 #place(center + bottom, figure(feedback-qr(size: 3cm), numbering: none, caption: [Форма обратной связи]))
 

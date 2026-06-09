@@ -5,16 +5,16 @@
 
 #show: slides.with(
   title: "Code Retreat",
-  subtitle: "TDD & Pair-Programming",
-  date: "2026-02-28",
-  authors: "Telegram: @technicalexcellenceru, @mtsfintechjobs",
+  subtitle: "(AT|T)DD & Pair-Programming & AI",
+  date: "2026-08-01",
+  authors: "Telegram: @technicalexcellenceru, @ozon_tech",
 
   toc: false,
   count: "number",
   layout: "medium",
   ratio: 4 / 3,
 
-  title-color: rgb("#ff0032"),
+  title-color: rgb("#005bff"),
 )
 
 = О нас
@@ -98,12 +98,12 @@
 
   team-member("img/anna_korotkova.jpg", [Короткова Анна], [ Java/Kotlin Developer]),
   team-member("img/julia_fatkullina.jpg", [Юлия Фаткуллина], [ Senior .NET/Kotlin Developer]),
-  team-member("img/ilya_ilynykh.jpg", [Илья Ильиных], [ Go-разработчик (ex-Java). Пишет по TDD последние 3 года]),
+  team-member("img/ilya_ilynykh.jpg", [Илья Ильиных], [ Go-разработчик (ex-Java) ]),
   team-member("img/nikita_chursin.jpg", [Никита Чурсин], [ Разработчик, тренер по TDD]),
   team-member("img/ekaterina_cherepanova.jpg", [Екатерина Черепанова], [ Senior Java/Kotlin Developer]),
 )
 
-= Спасибо "МТС Финтех"!
+= Спасибо "Ozon Tech"!
 
 = Теория
 
@@ -212,43 +212,10 @@
 
 #task()
 #place(center + bottom, task-qr(size: 2.5cm))
-#place(
-  bottom + center,
-  box(
-    fill: luma(230),
-    inset: 10pt,
-    radius: 10pt,
-    [ Будет еще задача со звездочкой! ],
-  ),
-  float: true,
-)
 
 == Иллюстрация
 
-#place(
-  center + horizon,
-  [
-    #figure(
-      grid(
-        columns: 3,
-        rows: 4,
-        gutter: 1mm,
-        image("img/game-example-1.1.png", width: 35%), [#sym.arrow], image("img/game-example-1.2.png", width: 35%),
-        image("img/game-example-2.1.png", width: 35%), [#sym.arrow], image("img/game-example-2.2.png", width: 35%),
-        image("img/game-example-3.1.png", width: 35%), [#sym.arrow], image("img/game-example-3.2.png", width: 35%),
-        image("img/game-example-5.1.png", width: 35%), [#sym.arrow], image("img/game-example-5.2.png", width: 35%),
-      ),
-      caption: [Правила в картинках],
-      numbering: none,
-    )
-  ],
-)
-
-
-== Задача со звездочкой
-
-#task-hex()
-#place(center + bottom, task-hex-qr())
+#place(center + horizon, checkout-example-diagram())
 
 = Первая сессия
 
@@ -256,32 +223,7 @@
 
 = Перерыв
 
-= Вторая сессия (ограничения)
-
-== Усложнения
-
-+ Только *void-методы*.
-+ Без *void-методов*.
-+ Без *if*.
-+ Без *любых условных операторов*.
-+ Без *get*\/*set*-методов.
-+ Без *изменяемых объектов*.
-+ Без *циклов*.
-+ *Однострочные* методы.
-+ Не более *4* строк в функции _после шага рефакторинга_.
-+ Только один уровень *отступов*.
-+ Без *примитивов*.
-+ Без *мыши*.
-+ Не более *двух параметров* в функции.
-+ *Слепой* навигатор.
-+ *TCR* (Test, Commit, Revert) по 2 минуты.
-+ *Два ограничения* на выбор.
-
-#review-questions()
-
-= Перерыв
-
-= Работа с AI
+= AI
 
 == Настроить инструменты
 
@@ -292,30 +234,50 @@
 
 Не получилось настроить агента? Воспользуйтесь чатом, суть остается такой же.
 
-
 #place(center + bottom, figure(
   qr-code("https://chat.qwen.ai/", width: 4cm),
   numbering: none,
   caption: [qwen-чат в браузере],
 ))
 
-== Демонстрация работы с AI
+== Советы
 
 - Переключайте режимы работы.
+- Не знаете, как лучше работать с LLM? Спросите LLM об этом.
 - Не надо сейчас заниматься настройкой агентов и навыков: мы сегодня не об этом.
 
-= Третья сессия (AI)
+= Вторая сессия
+
+#review-questions()
+
+= Перерыв
+
+= Приемочное тестирование с AI
+
+== Настроить инструменты
+
+Для таких тестов нужны инструменты, чтобы они не были слишком сложными. Их
+можно написать самому под проект, либо использовать существующие.
+
+// TODO: Добавить краткое пояснение, если ребята не будут решать эту задачку.
+Пример постановки приемочных тестов будет делаться на базе игры-жизни.
+
+== Советы
+
+- Сделайте инструмент, если надо.
+- Тесты должны быть достаточно достоверными, чтобы можно было не погружаться в
+  реализацию.
+
+= Третья сессия
 
 #review-questions()
 
 = Заключение
 
-== Заключение
+== Спасибо за участие!
 
-Спасибо за участие!
+Пишите тесты, пишите код в парах! Не бойтесь AI.
 
-Пишите тесты, пишите код в парах!
-
-Заходите в Telegram: _\@technicalexcellenceru_, _\@mtsfintechjobs_.
+Заходите в Telegram: _\@technicalexcellenceru_, _\@ozon_tech_.
 
 #place(center + bottom, figure(feedback-qr(size: 5cm), numbering: none, caption: [Форма обратной связи]))
