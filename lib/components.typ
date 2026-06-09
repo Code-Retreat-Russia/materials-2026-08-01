@@ -2,7 +2,6 @@
   show "Telegram": [*Telegram*]
 
   show "opencode": [*opencode*]
-  show "deepseek": [*deepseek*]
   show "qwen": [*qwen*]
   show "qwen-code": [*qwen-code*]
   show "Tab": [*Tab*]
