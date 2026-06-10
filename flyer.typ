@@ -49,15 +49,29 @@
 
 #colbreak()
 
+= Acceptance Testing
+
+#acceptance-testing()
+
+#acceptance-testing-diagram()
+
 = AI
 
 #ai-modes()
+
+#place(center + bottom, figure(feedback-qr(size: 3cm), numbering: none, caption: [Форма обратной связи]))
+#colbreak()
 
 = Задача
 
 #task()
 
-#place(center + bottom, figure(feedback-qr(size: 3cm), numbering: none, caption: [Форма обратной связи]))
+== Условия для ATDD
+
+#task-harder()
+
+#place(center + bottom, figure(task-qr(size: 5cm), numbering: none, caption: [Условие задачи]))
+
 
 #colbreak()
 
@@ -65,14 +79,5 @@
   columns: 1,
   rows: (1cm, auto),
   [= Заметки],
-  rect(width: 100%, height: 90%, stroke: 1pt),
-)
-
-#colbreak()
-
-#grid(
-  columns: 1,
-  rows: (1cm, auto),
-  [= Чему я научился?],
   rect(width: 100%, height: 90%, stroke: 1pt),
 )

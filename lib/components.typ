@@ -11,6 +11,8 @@
   show "TDD": [*TDD*]
   show "ATDD": [*ATDD*]
   show "Acceptance Testing": [*Acceptance Testing*]
+  show "Приемочное тестирование": [*Приемочное тестирование*]
+  show "Приемочных тестов": [*Приемочное тестирование*]
   show "Pair-Programming": [*Pair-Programming*]
 
   show "Java": [*Java*]
@@ -39,6 +41,30 @@
 
     Это важно для работы, чтобы не бросаться к разработке сразу, а сначала составить план.
   ]
+}
+
+#let agent-modes-diagram() = {
+  import "@preview/fletcher:0.5.8" as fletcher
+
+  fletcher.diagram(
+    spacing: (0.5em, 0.5em),
+    cell-size: (2.8em, 1.2em),
+    {
+      let (request, plan, execute, check, refine) = ((1, 0), (1, 1), (2, 2), (1, 3), (0, 2))
+
+      fletcher.node(request, [*Запрос* \ задача], fill: rgb("#E3F2FD"))
+      fletcher.node(plan, [*Plan mode* \ план и вопросы], fill: rgb("#FFFDE7"))
+      fletcher.node(execute, [*Execute mode* \ правки и команды], fill: rgb("#E8F5E9"))
+      fletcher.node(check, [*Проверка* \ результат], fill: rgb("#E8EAF6"))
+      fletcher.node(refine, [*Уточнение* \ следующий шаг], fill: rgb("#F3E5F5"))
+
+      fletcher.edge(request, plan, "->")
+      fletcher.edge(plan, execute, "->")
+      fletcher.edge(execute, check, "->")
+      fletcher.edge(check, refine, "->")
+      fletcher.edge(refine, plan, "->")
+    },
+  )
 }
 
 #let goals() = {
@@ -78,11 +104,20 @@
 
     В магазине есть: *товар*, *цена на товар*, *специальная цена на товар*.
 
-    *Товар*: Единица продукта, определяемая по идентификатору *SKU* (_Stock Keeping Unit_). В нашем случае *SKU* может быть произвольной строкой.
-    *Цена на товар*: Стоимость *одного товара*. В нашем случае это просто число.
-    *Специальная цена на товар*: Стоимость *нескольких единиц товара*.
+    - *Товар*: Единица продукта, определяемая по идентификатору *SKU* (_Stock Keeping Unit_). В нашем случае *SKU* может быть произвольной строкой.
+    - *Цена на товар*: Стоимость *одного товара*. В нашем случае это просто число.
+    - *Специальная цена на товар*: Стоимость *нескольких единиц товара*.
 
     _Пример специальной цены_: Товар "A" стоит 50, но если покупать сразу 3, то они обойдутся в 130.
+  ]
+}
+
+#let task-harder() = {
+  [
+    - *Специальная цена на товары*:#footnote[Задача сложнее, чем кажется, но нам эта сложность не принципиальна] Стоимость *нескольких единиц товаров*.
+    - *Чек*: вывод *правил*, по которым формировалась цена.
+
+    _Пример специальной цены на товары_: Товар "A" стоит 50, а "B" стоит 40, но если покупать сразу "A" и "B", то цена будет 70.
   ]
 }
 
@@ -138,12 +173,7 @@
   let basket = grid(
     columns: (auto,) * 6,
     gutter: 3pt,
-    sku([A]),
-    sku([A]),
-    sku([A]),
-    sku([B]),
-    sku([B]),
-    sku([C]),
+    sku([A]), sku([A]), sku([A]), sku([B]), sku([B]), sku([C]),
   )
 
   let receipt = [
@@ -195,6 +225,36 @@
   qr-code("https://forms.gle/7ifnuU9rVhfxxQk4A", width: size)
 }
 
+
+#let acceptance-testing() = {
+  [
+    Приемочное тестирование - это тесты, реализованные для проверки соответствия спецификации и/или контракта, чтобы помочь пользователям/заказчикам решить, готова ли разрабатываемая система.
+  ]
+}
+
+#let acceptance-testing-diagram() = {
+  import "@preview/fletcher:0.5.8" as fletcher
+
+  fletcher.diagram(
+    spacing: (0.5em, 0.5em),
+    cell-size: (2.8em, 1.2em),
+    {
+      let (customer, accept, implementation, demo, refine) = ((1, 0), (2, 1), (2, 3), (0, 3), (0, 1))
+
+      fletcher.node(customer, [*Заказчик* \ пример], fill: rgb("#E3F2FD"))
+      fletcher.node(accept, [*Приемочный тест* \ падает], fill: rgb("#FFEBEE"))
+      fletcher.node(implementation, [*Реализация* \ тест проходит], fill: rgb("#E8F5E9"))
+      fletcher.node(demo, [*Демо* \ проверка], fill: rgb("#F3E5F5"))
+      fletcher.node(refine, [*Уточнение* \ новый пример], fill: rgb("#FFFDE7"))
+
+      fletcher.edge(customer, accept, "->")
+      fletcher.edge(accept, implementation, "->")
+      fletcher.edge(implementation, demo, "->")
+      fletcher.edge(demo, refine, "->")
+      fletcher.edge(refine, customer, "->")
+    },
+  )
+}
 
 #let tdd-text() = {
   [
@@ -253,7 +313,7 @@
 
 #let pair-programming-timer-text() = {
   [
-    Делимся на роли и меняем их каждые 5-10 минут.#footnote[Конечно, можно и не точно 5-10 минут, главное меняться _достаточно_ часто.]
+    Делимся на роли и меняем их каждые 5-10 минут#footnote[Конечно, можно и не точно 5-10 минут, главное меняться _достаточно_ часто.].
   ]
 }
 
