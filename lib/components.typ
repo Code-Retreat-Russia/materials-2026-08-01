@@ -231,20 +231,35 @@
   ]
 }
 
-#let acceptance-testing-diagram() = {
+#let acceptance-testing-diagram(compact: false) = {
   import "@preview/fletcher:0.5.8" as fletcher
+
+  let node(body) = if compact {
+    align(center)[
+      #set text(size: 8pt)
+      #body
+    ]
+  } else {
+    body
+  }
+  let cell-size = if compact { (2em, 1em) } else { (2.8em, 1.2em) }
+  let implementation-text = if compact {
+    [*Реализация* \ через TDD]
+  } else {
+    [*Реализация* \ тест проходит; пишем код по TDD]
+  }
 
   fletcher.diagram(
     spacing: (0.5em, 0.5em),
-    cell-size: (2.8em, 1.2em),
+    cell-size: cell-size,
     {
       let (customer, accept, implementation, demo, refine) = ((1, 0), (2, 1), (2, 3), (0, 3), (0, 1))
 
-      fletcher.node(customer, [*Заказчик* \ пример], fill: rgb("#E3F2FD"))
-      fletcher.node(accept, [*Приемочный тест* \ падает], fill: rgb("#FFEBEE"))
-      fletcher.node(implementation, [*Реализация* \ тест проходит; пишем код по TDD], fill: rgb("#E8F5E9"))
-      fletcher.node(demo, [*Демо* \ проверка], fill: rgb("#F3E5F5"))
-      fletcher.node(refine, [*Уточнение* \ новый пример], fill: rgb("#FFFDE7"))
+      fletcher.node(customer, node([*Заказчик* \ пример]), fill: rgb("#E3F2FD"))
+      fletcher.node(accept, node([*Приемочный тест* \ падает]), fill: rgb("#FFEBEE"))
+      fletcher.node(implementation, node(implementation-text), fill: rgb("#E8F5E9"))
+      fletcher.node(demo, node([*Демо* \ проверка]), fill: rgb("#F3E5F5"))
+      fletcher.node(refine, node([*Уточнение* \ новый пример]), fill: rgb("#FFFDE7"))
 
       fletcher.edge(customer, accept, "->")
       fletcher.edge(accept, implementation, "->")

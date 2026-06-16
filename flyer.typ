@@ -53,7 +53,7 @@
 
 #acceptance-testing()
 
-#acceptance-testing-diagram()
+#acceptance-testing-diagram(compact: true)
 
 = AI
 
