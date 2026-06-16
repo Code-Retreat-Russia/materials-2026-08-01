@@ -222,7 +222,7 @@
   import "@preview/cades:0.3.1": qr-code
 
   // TODO: Создать новую форму.
-  qr-code("https://forms.gle/7ifnuU9rVhfxxQk4A", width: size)
+  qr-code("https://forms.gle/mnVXKhpCPpZ3FCcq9", width: size)
 }
 
 
